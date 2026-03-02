@@ -38,6 +38,40 @@ body {
   font-size: 16px;
 }
 
+.page-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+#result {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 24px;
+}
+
+.result-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 12px 30px rgba(31, 31, 31, 0.08);
+  margin-bottom: 10px;
+  height: 48px;
+}
+
+.result-panel h2 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0.2px;
+}
+
 .panel {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -125,10 +159,15 @@ button.ghost {
 }
 
 .status {
-  margin-top: 12px;
+  padding: 8px 8px;
+  border-radius: 999px;
+  background: #eef5f4;
   color: var(--accent-strong);
   font-weight: 600;
-  min-height: 20px;
+  font-size: 12px;
+  min-height: 15px;
+  display: inline-flex;
+  align-items: center;
 }
 
 @media (max-width: 600px) {

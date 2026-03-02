@@ -2,7 +2,8 @@ const list = document.getElementById("items-list");
 const badgeList = document.getElementById("badge-list");
 const addButton = document.getElementById("add-item");
 const addBadgeButton = document.getElementById("add-badge");
-const saveButtons = document.querySelectorAll("[data-action='save']");
+const saveButton = document.getElementById("save-all");
+const result = document.getElementById("result");
 const status = document.getElementById("status");
 
 function createItemRow(value = "") {
@@ -88,11 +89,17 @@ function readBadgesFromUI() {
 function setStatus(message) {
   status.textContent = message;
   if (message) {
+    status.style.visibility = "visible";
     window.setTimeout(() => {
       status.textContent = "";
+      status.style.visibility = "hidden";
     }, 2000);
+  } else {
+    status.style.visibility = "hidden";
   }
 }
+
+status.style.visibility = "hidden";
 
 async function loadItems() {
   const { menuItems, badgeItems } = await chrome.storage.sync.get({
@@ -113,13 +120,11 @@ addBadgeButton.addEventListener("click", () => {
   badgeList.appendChild(createBadgeRow());
 });
 
-saveButtons.forEach((button) => {
-  button.addEventListener("click", async () => {
-    const items = readItemsFromUI();
-    const badges = readBadgesFromUI();
-    await chrome.storage.sync.set({ menuItems: items, badgeItems: badges });
-    setStatus("Saved");
-  });
+saveButton.addEventListener("click", async () => {
+  const items = readItemsFromUI();
+  const badges = readBadgesFromUI();
+  await chrome.storage.sync.set({ menuItems: items, badgeItems: badges });
+  setStatus("Saved");
 });
 
 loadItems().catch(() => setStatus("Failed to load settings"));
